@@ -1,0 +1,19 @@
+services:
+    db:
+        image: mysql:8.0
+        restart: unless-stopped
+        hostname: db
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${DB_NAME}
+            - MYSQL_USER=${DB_USER}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_TCP_PORT=${DB_PORT}
+        ports:
+            - ${DB_PORT}:${DB_PORT}
+        volumes:
+            - db_volume:/var/lib/mysql
+            - ./mysql-init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+    db_volume:
