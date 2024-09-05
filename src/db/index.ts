@@ -1,5 +1,5 @@
 export const connectToDB = async (): Promise<void> => {
-    console.log(`Connecting to MongoDB...`)
+    console.log(`Connecting to DB...`)
     try {
         console.log("DB connected successfully")
     } catch (error) {

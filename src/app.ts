@@ -2,7 +2,6 @@ import { closeDBConnection } from "@/db"
 import { type Middleware } from "@/types/middleware"
 import ExpressError from "@errors/ExpressError"
 import express, { type Application } from "express"
-import { PORT } from "./env"
 import { type IController } from "./interfaces/IController"
 
 export class App {
@@ -34,8 +33,8 @@ export class App {
     }
 
     public start = (listener: () => void) => {
-        this.app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`)
+        this.app.listen(process.env.PORT, () => {
+            console.log(`Server is running on port ${process.env.PORT}`)
         })
         listener()
     }

@@ -26,6 +26,7 @@
         "@types/passport-jwt": "^4.0.1",
         "@types/passport-local": "^1.0.38",
         "@typescript-eslint/eslint-plugin": "^5.43.0",
+        "concurrently": "^8.2.2",
         "eslint": "^8.35.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-config-standard-with-typescript": "^34.0.1",
@@ -40,7 +41,9 @@
     },
     "scripts": {
         "start": "NODE_ENV=production node dist/index.js",
-        "dev": "nodemon -w src/ -e ts -x 'npm run build && NODE_ENV=development node dist/index.js'",
+        "dev": "concurrently \"npm run dev:nodb\" \"npm run db\"",
+        "dev:nodb": "nodemon -w src/ -e ts -x 'npm run build && NODE_ENV=development node dist/index.js'",
+        "db": "docker-compose -f docker-compose.development.yaml up",
         "build": "npx tsc -p .",
         "pm2:start": "NODE_ENV=production pm2 start dist/index.js --name=my-server --no-daemon",
         "pm2:stop": "pm2 stop my-server",

@@ -16,5 +16,3 @@ const projectRoot = process.cwd()
         dotenv.config({ path: fullPath, override: true })
     }
 })
-
-export const { FRONTEND_URL: FRONTEND_URLS, PORT, NODE_ENV } = process.env
